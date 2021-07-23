@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+    hello-go:
+        build:
+            context: .
+        image: guilhermedemarchi/hello-go
+        container_name: hellogo
