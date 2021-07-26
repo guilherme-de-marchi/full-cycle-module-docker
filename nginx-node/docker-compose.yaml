@@ -13,7 +13,6 @@ services:
         restart: always
 
         depends_on:
-            - nginx
             - mysql
 
         volumes:
@@ -28,6 +27,9 @@ services:
         container_name: nginx
         tty: true
         restart: always
+
+        depends_on:
+            - api
 
         ports:
             - "8080:80"
