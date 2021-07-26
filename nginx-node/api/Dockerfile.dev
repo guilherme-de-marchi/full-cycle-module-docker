@@ -1,0 +1,14 @@
+FROM node:alpine
+WORKDIR /app
+
+RUN apk add --no-cache bash
+
+RUN npm init -y
+COPY package.json /app/package.json
+    
+RUN npm install express sequelize mysql2 sequelize-cli && \
+    npm install --save-dev nodemon
+
+EXPOSE 80
+
+CMD ["npm", "start"]

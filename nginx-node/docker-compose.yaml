@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+
+    api:
+
+        build:
+            context: ./api
+            dockerfile: Dockerfile.dev
+
+        container_name: api
+        tty: true
+        restart: always
+
+        depends_on:
+            - nginx
+            - mysql
+
+        volumes:
+            - ./api/src:/app/src
+
+        networks:
+            - fullcyclenet
+
+    nginx:
+
+        image: nginx:alpine
+        container_name: nginx
+        tty: true
+        restart: always
+
+        ports:
+            - "8080:80"
+
+        volumes:
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/www/public:/www/public
+
+        networks:
+            - fullcyclenet
+
+    mysql:
+
+        image: mysql
+        container_name: mysql
+        tty: true
+        restart: always
+
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=full_cycle_development
+
+        volumes:
+            - ./mysql:/var/lib/mysql
+
+        networks:
+            - fullcyclenet
+
+networks:
+
+    fullcyclenet:
+        driver: bridge
