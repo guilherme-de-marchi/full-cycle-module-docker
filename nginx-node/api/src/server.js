@@ -9,4 +9,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/people', routes.people);
 
-app.listen(80)
+app.listen(3000)
