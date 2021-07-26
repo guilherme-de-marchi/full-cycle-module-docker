@@ -16,7 +16,7 @@ COPY package.json /app/package.json
 RUN npm install express sequelize mysql2 sequelize-cli && \
     npm install --save-dev nodemon
 
-EXPOSE 80
+EXPOSE 3000
 
 ENTRYPOINT [ "dockerize", "-wait", "tcp://mysql:33060", "-timeout", "30s" ]
 CMD ["npm", "start"]
